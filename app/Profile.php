@@ -12,10 +12,11 @@ class Profile extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 
-        'institution', 
+        'user_id',
+        'institution',
         'description',
         'phone_number',
+        'image_path',
     ];
 
     public function user(){

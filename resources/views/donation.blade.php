@@ -12,7 +12,7 @@
         </div>
         <div class="progress profile-complition text-right ">
             <div class="progress-bar progress-bar-success " role="progressbar " aria-valuenow="40" aria-valuemin="0 " aria-valuemax="100 " style="width: 0% ">
-                <span class="sr-only "> 0% 
+                <span class="sr-only "> 0%
                     <span class="editableLabel " labelid="global:raised">raised</span>
                     <i class="down "></i>
                 </span>
@@ -45,9 +45,6 @@
             <br>
             <div class="hidden-sm hidden-xs ">
                 <a href="https://www.investmentnetwork.cn/business-proposals/pandamart-15-826837" class="btn btn-primary " target="_blank">Find Out More</a>
-            </div>
-            <div class="hidden-md hidden-lg ">
-                <a href="https://www.investmentnetwork.cn/business-proposals/pandamart-15-826837" class="btn btn-primary " target="_blank ">Find Out More</a>
             </div>
         </div>
     </div>

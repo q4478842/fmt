@@ -11,17 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home2');
-});
 
-Route::get('/tell', function () {
-    return "tell your father";
-});
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home2');
 Route::middleware(['auth'])->group(function () {
-	Route::resource('profile', 'ProfileController');
+	Route::resource('profiles', 'ProfileController');
 });
+Route::post('/profiles/upload', 'ProfileController@upload')->name('profiles.upload');

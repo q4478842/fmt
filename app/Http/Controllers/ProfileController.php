@@ -17,13 +17,12 @@ class ProfileController extends Controller
     public function index()
     {
         //
-        if(Auth::check()){
-            $profile = Profile::where('user_id', Auth::user()->id)->first();
-            $user_data = User::where('id', Auth::user()->id)->first();
-            return view('profile', ['profile'=> $profile, 
-                                    'user_data'=> $user_data]);
-        }
-        return view('auth.login');
+        $profile = new Profile();
+
+        $user_data = User::where('id', Auth::user()->id)->first();
+
+        return view('profiles.index', ['profile'=> $profile,
+                                       'user_data'=> $user_data]);
     }
 
     /**
@@ -44,20 +43,7 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        if(Auth::check()){
-            $res = Profile::where('user_id', Auth::user()->id)
-                            ->update([
-                                'first_name'=> $data['first_name'],
-                                'last_name'=> $data['last_name'],
-                                'phone_number'=> $data['phone_number'],
-            ]);
-            if($res){
-                return redirect()->route('profile.index')
-                 ->with('success', 'profile update successfully');
-            }
-        }
-        
+
     }
 
     /**
@@ -69,6 +55,16 @@ class ProfileController extends Controller
     public function show($id)
     {
         //
+        $profile = Profile::where('user_id', $id)->first();
+        if(!isset($profile)){
+            $profile = new Profile([
+                'image_path'=> '/img/avatar.png'
+            ]);
+        }
+
+        $user_data = User::where('id', Auth::user()->id)->first();
+        return view('profiles.index', ['profile'=> $profile,
+                                       'user_data'=> $user_data]);
     }
 
     /**
@@ -92,7 +88,40 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = $request->all();
+        if(Auth::user()->id == $id or Auth::user()->role_id == 2){
+            $sql = Profile::where('user_id', Auth::user()->id);
+            if($sql->get()->isEmpty()){
+                dd($request);
+            }
+            $res = $sql->update([
+                'first_name'=> $data['first_name'],
+                'last_name'=> $data['last_name'],
+                'phone_number'=> $data['phone_number'],
+            ]);
+            if($res){
+                return redirect()->route('profiles.show', $id)
+                 ->with('success', 'profile update successfully');
+            }
+            else{
+                return redirect()->route('profiles.show', $id)
+                 ->with('error', 'SQL error');
+            }
+        }
+        else{
+            return redirect()->route('profiles.show', $id)
+                 ->with('error', 'Not Authorized');
+        }
+    }
+
+    public function upload(Request $request){
         dd($request);
+        $fileName = sprintf("%d_%s.jpg", Auth::user()->id, date('H_i_s'));
+        $path = $request->file('files')[0]->storeAs(
+            'img/',
+            $fileName);
+        return response($path, 200)
+                  ->header('Content-Type', 'text/plain');
     }
 
     /**
