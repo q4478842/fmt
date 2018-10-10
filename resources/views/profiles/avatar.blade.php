@@ -13,7 +13,7 @@
             </span>
         </div>
         <div class="p-2">
-            <button type="submit" id="btn-image-save" class="btn btn-block btn-success btn-image-save">
+            <button type="button" id="btn-image-save" class="btn btn-block btn-success btn-image-save">
                 <span>Set as Profile Picture</span>
             </button>
         </div>

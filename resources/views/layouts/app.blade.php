@@ -43,7 +43,6 @@
         <script src="/fmt-bower/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="/js/app.js"></script>
         @endenv
-        <script src="/fmt-bower/jquery-form/dist/jquery.form.min.js"></script>
     </head>
     <body>
         <div class="d-flex flex-column flex-md-row align-items-center p-2 px-md-4 mb-2 bg-gray-dark border-bottom shadow-sm">

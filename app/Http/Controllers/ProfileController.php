@@ -115,13 +115,14 @@ class ProfileController extends Controller
     }
 
     public function upload(Request $request){
-        dd($request);
-        $fileName = sprintf("%d_%s.jpg", Auth::user()->id, date('H_i_s'));
-        $path = $request->file('files')[0]->storeAs(
-            'img/',
-            $fileName);
-        return response($path, 200)
-                  ->header('Content-Type', 'text/plain');
+        $data = $request->all();
+        #dd($data);
+        // $fileName = sprintf("%d_%s.jpg", Auth::user()->id, date('H_i_s'));
+        // $path = $request->file('files')[0]->storeAs(
+        //     'img/',
+        //     $fileName);
+        return redirect()->route('profiles.show', 1)
+                 ->with('success', 'upload update successfully');
     }
 
     /**
